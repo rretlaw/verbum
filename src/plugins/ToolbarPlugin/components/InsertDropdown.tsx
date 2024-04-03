@@ -50,22 +50,12 @@ function InsertImageDialog({
     <>
       {!mode && (
         <div className="ToolbarPlugin__dialogButtonsList">
-          <Button
-            data-test-id="image-modal-option-sample"
-            onClick={() =>
-              onClick({
-                altText: 'Yellow flower in tilt shift lens',
-                src: null, //yellowFlowerImage,
-              })
-            }
-          >
-            Sample
-          </Button>
+          
           <Button
             data-test-id="image-modal-option-url"
             onClick={() => setMode('url')}
           >
-            URL
+            URLx
           </Button>
           <Button
             data-test-id="image-modal-option-file"
