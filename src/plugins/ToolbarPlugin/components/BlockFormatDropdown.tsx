@@ -19,6 +19,7 @@ import DropDown from '../../../ui/DropDown';
 import ToolbarContext from '../../../context/ToolbarContext';
 import { useTranslation } from 'react-i18next';
 
+
 const BlockFormatDropdown = () => {
   const { initialEditor } = useContext(EditorContext);
   const { blockType } = useContext(ToolbarContext);
@@ -174,13 +175,13 @@ const BlockFormatDropdown = () => {
         <span className="text">{t('toolbar:blockFormatDropdown.quote')}</span>
         {blockType === 'quote' && <span className="active" />}
       </button>
-      <button className="item" onClick={formatCode} type="button">
+      {/* <button className="item" onClick={formatCode} type="button">
         <span className="icon code" />
         <span className="text">
           {t('toolbar:blockFormatDropdown.code')}
         </span>
         {blockType === 'code' && <span className="active" />}
-      </button>
+      </button> */}
     </DropDown>
   );
 };

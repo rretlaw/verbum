@@ -9,7 +9,7 @@
 @import 'https://fonts.googleapis.com/css?family=Reenie+Beanie';
 
 .editor-shell {
-  margin: 20px auto;
+  /* margin: 20px auto; */
   border-radius: 2px;
   max-width: 1000px;
   color: #000;
@@ -525,7 +525,7 @@ select.font-family {
 }
 
 .dropdown {
-  z-index: 10;
+  z-index: 50;
   display: block;
   position: absolute;
   box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1),
@@ -1090,7 +1090,8 @@ button.action-button:disabled {
   border-top-right-radius: 10px;
   vertical-align: middle;
   overflow: auto;
-  height: 36px;
+  height: 40px;
+  background-color: rgb(241 245 249);
 }
 
 .toolbar button.toolbar-item {

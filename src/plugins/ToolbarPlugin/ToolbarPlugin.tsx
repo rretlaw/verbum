@@ -69,7 +69,7 @@ interface IToolbarProps {
 
 const ToolbarPlugin = ({
   children,
-  defaultFontSize = '15px',
+  defaultFontSize = '16px',
   defaultFontColor = '#000',
   defaultBgColor = '#fff',
   defaultFontFamily = 'Arial',

@@ -25,21 +25,25 @@ const Direction = {
 export default function ImageResizer({
   onResizeStart,
   onResizeEnd,
+  buttonRef,
   imageRef,
   maxWidth,
   editor,
   showCaption,
   setShowCaption,
+  captionsEnabled,
 }: {
   editor: LexicalEditor;
+  buttonRef: {current: null | HTMLButtonElement};
   imageRef: { current: null | HTMLElement };
   maxWidth?: number;
   onResizeEnd: (width: 'inherit' | number, height: 'inherit' | number) => void;
   onResizeStart: () => void;
   setShowCaption: (boolean) => void;
   showCaption: boolean;
+  captionsEnabled: boolean;
 }): JSX.Element {
-  const buttonRef = useRef(null);
+  //const buttonRef = useRef(null);
   const positioningRef = useRef<{
     currentHeight: 'inherit' | number;
     currentWidth: 'inherit' | number;
@@ -114,7 +118,9 @@ export default function ImageResizer({
     event: React.PointerEvent<HTMLDivElement>,
     direction: number
   ) => {
+
     const image = imageRef.current;
+    
     if (image !== null) {
       const { width, height } = image.getBoundingClientRect();
       const positioning = positioningRef.current;
@@ -138,6 +144,7 @@ export default function ImageResizer({
       document.addEventListener('pointerup', handlePointerUp);
     }
   };
+
   const handlePointerMove = (event: PointerEvent) => {
     const image = imageRef.current;
     const positioning = positioningRef.current;
@@ -191,6 +198,7 @@ export default function ImageResizer({
       }
     }
   };
+
   const handlePointerUp = () => {
     const image = imageRef.current;
     const positioning = positioningRef.current;
@@ -213,9 +221,10 @@ export default function ImageResizer({
       document.removeEventListener('pointerup', handlePointerUp);
     }
   };
+
   return (
     <>
-      {!showCaption && (
+      {!showCaption && captionsEnabled && (
         <button
           className="image-caption-button"
           ref={buttonRef}

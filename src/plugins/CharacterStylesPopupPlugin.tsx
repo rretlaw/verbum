@@ -165,6 +165,10 @@ function FloatingCharacterStylesEditor({
     );
   }, [editor, updateCharacterStylesEditor]);
 
+  if (editor.isEditable() === false) {
+    return null;
+  }
+
   return (
     <div ref={popupCharStylesEditorRef} className="character-style-popup">
       <button

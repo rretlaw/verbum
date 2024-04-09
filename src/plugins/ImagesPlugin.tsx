@@ -197,9 +197,11 @@ export function InsertImageDialog({
 export default function ImagesPlugin({
   captionsEnabled,
   maxWidth,
+  maxInitialWidth = 300,
 }: {
   captionsEnabled?: boolean;
   maxWidth?: number;
+  maxInitialWidth?: number;
 }): JSX.Element | null {
   const [editor] = useLexicalComposerContext();
 
@@ -214,6 +216,7 @@ export default function ImagesPlugin({
         (payload) => {
           const imageNode = $createImageNode({
             ...payload,
+            width: payload.width < maxInitialWidth ? payload.width : maxInitialWidth,
             maxWidth: maxWidth,
           });
           $insertNodes([imageNode]);
@@ -383,4 +386,59 @@ function getDragSelection(event: DragEvent): Range | null | undefined {
   }
 
   return range;
+}
+
+
+
+
+
+export function SelectImageDialog({
+  activeEditor,
+  onClose,
+  images,
+}: {
+  activeEditor: LexicalEditor;
+  onClose: () => void;
+  images: JSX.Element[];
+}): JSX.Element {
+  
+  
+  const hasModifier = useRef(false);
+
+  useEffect(() => {
+    hasModifier.current = false;
+    const handler = (e: KeyboardEvent) => {
+      hasModifier.current = e.altKey;
+    };
+    document.addEventListener('keydown', handler);
+    return () => {
+      document.removeEventListener('keydown', handler);
+    };
+  }, [activeEditor]);
+
+  const onClick = (payload: InsertImagePayload) => {
+    activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
+    onClose();
+  };
+
+  return (
+    <>
+      
+        <DialogButtonsList>
+
+        {images.map((image) => (
+          <Button
+            data-test-id="image-modal-option-url h-64 w-64"
+            onClick={() => onClick({ altText: 'alttext' , src: image.props.src })}
+          >
+            {image}
+          </Button>
+        ))}
+
+        </DialogButtonsList>
+      
+      
+      
+    </>
+  );
 }

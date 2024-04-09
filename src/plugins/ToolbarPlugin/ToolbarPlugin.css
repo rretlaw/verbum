@@ -22,4 +22,33 @@
 
 .ToolbarPlugin__dialogButtonsList button {
   margin-bottom: 20px;
+  max-height: 96px;
+  max-width: 96px;
+  height: auto;
+  width: auto;  
+  padding: 0px;
+  border: 1px solid #6d6666;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ToolbarPlugin__dialogButtonsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Creates three columns of equal width */
+  gap: 10px; /* Optional: defines space between grid items */
+}
+
+.ToolbarPlugin__dialogButtonsGrid-item {
+  width: auto;  
+  height: auto;
+  padding: 0px;
+  border: 1px solid #6d6666;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ToolbarPlugin__dialogButtonsGrid-item button {
+  padding: 0px;
+  max-height: 128px;
+  max-width: 128px;
 }

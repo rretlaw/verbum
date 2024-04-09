@@ -40,6 +40,8 @@ import { LexicalEditor } from 'lexical';
 import { useTranslation } from 'react-i18next';
 import DragDropPaste from './plugins/DragDropPastePlugin';
 import EmojiPickerPlugin from './plugins/EmojiPickerPlugin';
+import TreeViewPlugin from './plugins/TreeViewPlugin';
+
 
 interface IEditorProps {
   children?: ReactNode;
@@ -104,7 +106,7 @@ const Editor = ({
 
         <>
           <RichTextPlugin
-            contentEditable={<ContentEditable />}
+            contentEditable={<ContentEditable className={!isEditable ? 'ContentEditableReadOnly__root' : ''} />}
             placeholder={placeholderComponent}
             ErrorBoundary={LexicalErrorBoundary}
           />

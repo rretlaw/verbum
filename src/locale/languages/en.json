@@ -25,6 +25,29 @@
       "quote": "Quote",
       "code": "Code Block"
     },
+    "fontSizeDropdown": {
+      "Description": "Formatting options for text size",
+      "10px": "10px",
+      "12px": "12px",
+      "14px": "14px",
+      "16px": "16px",
+      "20px": "20px",
+      "24px": "24px",
+      "28px": "28px",
+      "32px": "32px",
+      "36px": "36px",
+      "40px": "40px",
+      "48px": "48px"
+    },
+    "fontFamilyDropdown": {
+      "Description": "Formatting options for text font",
+      "Arial": "Arial",
+      "Courier New": "Courier New",
+      "Georgia": "Georgia",
+      "Times New Roman": "Times New Roman",
+      "Trebuchet MS": "Trebuchet MS",
+      "Verdana": "Verdana"
+    },
     "boldButton": {
       "Title": "Bold",
       "Description": "Format text as bold. Shortcut:"

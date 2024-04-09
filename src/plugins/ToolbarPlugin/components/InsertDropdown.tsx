@@ -50,12 +50,11 @@ function InsertImageDialog({
     <>
       {!mode && (
         <div className="ToolbarPlugin__dialogButtonsList">
-          
           <Button
             data-test-id="image-modal-option-url"
             onClick={() => setMode('url')}
           >
-            URLx
+            URL
           </Button>
           <Button
             data-test-id="image-modal-option-file"
@@ -70,6 +69,42 @@ function InsertImageDialog({
     </>
   );
 }
+
+
+//#region Inserting different modules
+function SelectMediaDialog({
+  activeEditor,
+  onClose,
+  images,
+}: {
+  activeEditor: LexicalEditor;
+  onClose: () => void;
+  images: JSX.Element[];
+}): JSX.Element {
+  
+  const onClick = (payload: InsertImagePayload) => {
+    activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
+    onClose();
+  };
+
+  return (
+    <>
+        <div className="ToolbarPlugin__dialogButtonsGrid">
+          {images.map((image) => (
+          <div className='ToolbarPlugin__dialogButtonsGrid-item'>
+          <Button
+            data-test-id="image-modal-option-url "
+            onClick={() => onClick({ altText: 'alttext' , src: image.props.src })}
+          >
+            {image}
+          </Button>
+          </div>
+          ))}
+        </div>
+    </>
+  );
+}
+
 
 function InsertTableDialog({
   activeEditor,
@@ -303,6 +338,7 @@ export interface IInsertDropdownProps {
   enableExcalidraw?: boolean;
   enableHorizontalRule?: boolean;
   enableStickyNote?: boolean;
+  images?: JSX.Element[];
 }
 
 const InsertDropdown: React.FC<IInsertDropdownProps> = ({
@@ -313,6 +349,7 @@ const InsertDropdown: React.FC<IInsertDropdownProps> = ({
   enablePoll = false,
   enableHorizontalRule = false,
   enableStickyNote = false,
+  images = [],
 }: IInsertDropdownProps) => {
   const { initialEditor, activeEditor } = useContext(EditorContext);
   const [modal, showModal] = useModal();
@@ -329,7 +366,7 @@ const InsertDropdown: React.FC<IInsertDropdownProps> = ({
       {enableYoutube && <YouTubePlugin />}
       {enableTwitter && <TwitterPlugin />}
       {enablePoll && <PollPlugin />}
-      {enableImage.enable && <ImagesPlugin maxWidth={enableImage.maxWidth} />}
+      {enableImage.enable && <ImagesPlugin maxWidth={enableImage.maxWidth} maxInitialWidth={300} />}
       {enableHorizontalRule && <HorizontalRulePlugin />}
 
       <DropDown
@@ -353,13 +390,14 @@ const InsertDropdown: React.FC<IInsertDropdownProps> = ({
             <span className="text">Horizontal Rule</span>
           </button>
         )}
-        {enableImage.enable && (
+        {enableImage.enable && images.length > 0 && (
           <button
             onClick={() => {
-              showModal('Insert Image', (onClose) => (
-                <InsertImageDialog
+              showModal('Select Media', (onClose) => (
+                <SelectMediaDialog
                   activeEditor={activeEditor}
                   onClose={onClose}
+                  images={images}
                 />
               ));
             }}
@@ -367,7 +405,7 @@ const InsertDropdown: React.FC<IInsertDropdownProps> = ({
             type="button"
           >
             <i className="icon image" />
-            <span className="text">Image</span>
+            <span className="text">Media</span>
           </button>
         )}
         {enableTable && (
